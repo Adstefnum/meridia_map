@@ -65,7 +65,26 @@ fun GoogleMaps() {
                     mapView.getMapAsync {
                         it.mapType=1
                         it.uiSettings.isZoomControlsEnabled = true
+                      val mark1 = LatLng(17.385, 78.4867) //Hyderabad
+                            val mark2 = LatLng(18.5204, 73.8567) //Hyderabad
+
+                            it.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 12f))
+                            val markerOptions =  MarkerOptions()
+                                .title("Hyderabad")
+                                .position(mark1)
+                            it.addMarker(markerOptions)
+
+                            val markerOptions2 =  MarkerOptions()
+                                .title("Pune")
+                                .position(mark2)
+                            it.addMarker( markerOptions2 )
+
+
+
                     }
+
+
+
 
                 }
             }
