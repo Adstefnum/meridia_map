@@ -107,7 +107,7 @@ fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserver =
                 Lifecycle.Event.ON_PAUSE -> mapView.onPause()
                 Lifecycle.Event.ON_STOP -> mapView.onStop()
                 Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
-                else -> throw IllegalStateException()
+                Lifecycle.Event.ON_ANY -> throw IllegalStateException()
             }
         }
     }

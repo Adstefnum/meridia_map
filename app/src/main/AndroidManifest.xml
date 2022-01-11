@@ -3,7 +3,7 @@
     package="com.example.meridia_map">
 
     <meta-data android:name="com.google.android.geo.API_KEY"
-        android:value="AIzaSyAk_cE4ATfZP5DOrkN9BOJJnvbZoUboaEo"/>
+        android:value="BuildConfig.APP_KEY"/>
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application

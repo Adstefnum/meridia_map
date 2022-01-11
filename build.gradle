@@ -4,8 +4,17 @@ buildscript {
         compose_version = '1.0.1'
     }
     repositories {
+        maven {
+         url "https://mvnrepository.com/repos/springio-libs-release" 
+    }
+    maven {
+         url "https://mvnrepository.com/repos/bt-android-utils" 
+    }
+    maven {
+         url "https://repo.maven.apache.org/maven2/" 
+    }
         google()
-        mavenCentral()
+
     }
     dependencies {
         classpath "com.android.tools.build:gradle:7.0.4"
