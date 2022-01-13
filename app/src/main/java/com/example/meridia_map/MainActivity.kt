@@ -25,7 +25,9 @@ import com.google.android.libraries.maps.MapView
 import com.google.android.libraries.maps.model.LatLng
 import com.google.android.libraries.maps.model.MarkerOptions
 import com.google.android.libraries.maps.model.PolylineOptions
+import com.google.android.libraries.maps.model.*
 import com.google.maps.android.ktx.awaitMap
+import com.google.maps.android.ktx.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -62,28 +64,34 @@ fun GoogleMaps() {
             ) { mapView ->
                 CoroutineScope(Dispatchers.Main).launch {
 
-                    mapView.getMapAsync {
-                        it.mapType=1
-                        it.uiSettings.isZoomControlsEnabled = true
+                val map = mapView.awaitMap()
+                    
+                        //map.mapType=1
+                        map.uiSettings.isZoomControlsEnabled = true
                       val mark1 = LatLng(17.385, 78.4867) //Hyderabad
                             val mark2 = LatLng(18.5204, 73.8567) //Hyderabad
 
-                            it.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 12f))
+                            map.moveCamera(CameraUpdateFactory.newLatLngZoom(mark1, 12f))
                             val markerOptions =  MarkerOptions()
                                 .title("Hyderabad")
                                 .position(mark1)
-                            it.addMarker(markerOptions)
+                            map.addMarker(markerOptions)
 
                             val markerOptions2 =  MarkerOptions()
                                 .title("Pune")
                                 .position(mark2)
-                            it.addMarker( markerOptions2 )
+                            map.addMarker( markerOptions2 )
 
+                            map.addPolyline(
+                                PolylineOptions().add(
+                                    mark1,
+                                    LatLng(28.5204, 53.8567),
+                                    LatLng(30.5204, 66.8567),
+                                    mark2,
 
+                                    )
 
-                    }
-
-
+                                ).color = R.color.purple_500
 
 
                 }
@@ -105,7 +113,7 @@ fun rememberMapViewWithLifeCycle(): MapView {
     }
     val lifeCycleObserver = rememberMapLifecycleObserver(mapView)
     val lifeCycle = LocalLifecycleOwner.current.lifecycle
-    DisposableEffect(lifeCycle) {
+    DisposableEffect(lifeCycle,mapView) {
         lifeCycle.addObserver(lifeCycleObserver)
         onDispose {
             lifeCycle.removeObserver(lifeCycleObserver)
@@ -126,7 +134,7 @@ fun rememberMapLifecycleObserver(mapView: MapView): LifecycleEventObserver =
                 Lifecycle.Event.ON_PAUSE -> mapView.onPause()
                 Lifecycle.Event.ON_STOP -> mapView.onStop()
                 Lifecycle.Event.ON_DESTROY -> mapView.onDestroy()
-                Lifecycle.Event.ON_ANY -> throw IllegalStateException()
+                else -> throw IllegalStateException()
             }
         }
     }
