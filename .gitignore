@@ -1,5 +1,6 @@
 *.iml
 SHAfile
+crash_log.txt
 .gradle
 /local.properties
 /.idea/caches
@@ -16,3 +17,4 @@ SHAfile
 local.properties
 stacktrace.txt
 gradle.properties
+important_commands.txt
