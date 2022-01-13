@@ -1,8 +1,8 @@
 package com.example.meridia_map
 
 
-val json    = Json(JsonConfiguration.Stable)
-val mapmodel = json.parse(MapModel.serializer(), jsonString)
+//val json    = Json(JsonConfiguration.Stable)
+//val mapmodel = json.parse(MapModel.serializer(), jsonString)
 
 import kotlinx.serialization.*
 import kotlinx.serialization.json.*
